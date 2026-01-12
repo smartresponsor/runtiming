@@ -1,0 +1,25 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# docker-compose.swoole.yaml (snippet)
+# This is a reference. Integrate into your existing compose if needed.
+
+services:
+  app-swoole:
+    image: php:8.5-cli
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - RUNTIME_ENGINE=swoole
+      - RUNTIME_ENDPOINT_SECURITY_ENABLED=1
+      - RUNTIME_WORKER_LIFECYCLE_ENABLED=1
+      - RUNTIME_WORKER_RESET_ENABLED=1
+    # You must install swoole extension (example shown for PECL; adjust as needed):
+    command: >
+      bash -lc "
+        apt-get update &&
+        apt-get install -y git unzip libssl-dev &&
+        pecl install swoole &&
+        docker-php-ext-enable swoole &&
+        php -v &&
+        echo 'Swoole ready. Implement server entry and run it.'
+      "

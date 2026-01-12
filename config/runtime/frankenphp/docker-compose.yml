@@ -1,0 +1,19 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Minimal FrankenPHP worker-mode dev recipe for Symfony Runtime.
+
+services:
+  app:
+    image: dunglas/frankenphp
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      # Worker mode
+      FRANKENPHP_CONFIG: "worker ./public/index.php"
+      APP_RUNTIME: "Runtime\\FrankenPhpSymfony\\Runtime"
+      APP_ENV: "dev"
+      APP_DEBUG: "1"
+    ports:
+      - "8080:80"
+      - "8443:443"
+      - "8443:443/udp"

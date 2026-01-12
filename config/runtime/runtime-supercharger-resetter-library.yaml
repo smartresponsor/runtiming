@@ -1,0 +1,10 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Runtime resetter library configuration sketch.
+# Keep allow-lists explicit. Do not auto-discover by default.
+
+runtime_supercharger_resetter:
+  container_service_id:
+    - doctrine.orm.entity_manager
+    - doctrine.dbal.default_connection
+    - cache.app
+    - http_client

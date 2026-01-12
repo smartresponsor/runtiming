@@ -1,0 +1,1 @@
+{"ruleId":"RS001","severity":"warning","file":"src/Service/Runtime/Example.php","line":12,"message":"Static property in class may leak state across requests.","match":"private static $cache","excerpt":"private static $cache = [];"}

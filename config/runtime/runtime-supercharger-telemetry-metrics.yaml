@@ -1,0 +1,5 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+runtime_supercharger_telemetry:
+  namespace: runtime
+  export:
+    include_help: true

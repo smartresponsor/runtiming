@@ -1,0 +1,10 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+runtime_supercharger_lifecycle:
+  max_request: 1000
+  jitter_percent: 0.10
+  max_memory_byte: 268435456     # 256 MiB
+  emergency_memory_byte: 402653184 # 384 MiB
+  max_uptime_sec: 900            # 15 min
+  max_idle_sec: 300              # 5 min
+  max_request_duration_sec: 2.5  # slow request gate
+  max_memory_growth_byte: 134217728 # 128 MiB above baseline/high-water

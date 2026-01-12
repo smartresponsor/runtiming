@@ -1,0 +1,7 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp.
+parameters:
+    level: 0
+    paths:
+        - src
+        - test
+    tmpDir: var/phpstan

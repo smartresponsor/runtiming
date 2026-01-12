@@ -1,0 +1,25 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Caddyfile (template) — FrankenPHP profile for Symfony
+# Place this file at project root as "Caddyfile"
+
+{
+  # dev default
+  auto_https off
+}
+
+:8080 {
+  root * public
+  encode gzip zstd
+
+  # Standard PHP server mode (works without worker mode).
+  php_server
+
+  # Worker mode (optional; enable for long-running workers):
+  # php_server {
+  #   # Example: spawn 4 PHP workers serving public/index.php
+  #   # Exact syntax may differ by FrankenPHP version; adjust if needed.
+  #   worker public/index.php 4
+  # }
+
+  file_server
+}

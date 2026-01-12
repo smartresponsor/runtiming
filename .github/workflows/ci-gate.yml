@@ -1,0 +1,34 @@
+name: build-test-gate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test-gate:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer
+
+      - name: Fetch PHPUnit
+        env:
+          PHPUNIT_VERSION: "10.5.19"
+        run: |
+          curl -fsSL -o phpunit.phar "https://github.com/sebastianbergmann/phpunit/releases/download/${PHPUNIT_VERSION}/phpunit-${PHPUNIT_VERSION}.phar"
+          curl -fsSL -o phpunit.phar.sha256 "https://github.com/sebastianbergmann/phpunit/releases/download/${PHPUNIT_VERSION}/phpunit-${PHPUNIT_VERSION}.phar.sha256"
+          sha256sum -c phpunit.phar.sha256
+
+      - name: Run unit tests
+        run: |
+          php phpunit.phar --bootstrap tools/runtime/phpunit-bootstrap.php test
+
+      - name: Run runtime gate
+        run: |
+          bash tools/runtime/gate/run-rc-gate.sh

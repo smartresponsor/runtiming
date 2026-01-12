@@ -1,0 +1,26 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp.
+name: ci-phpstan
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Download phpstan
+        run: curl -L -o phpstan.phar https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar
+
+      - name: Run phpstan
+        run: php phpstan.phar analyse -c phpstan.neon

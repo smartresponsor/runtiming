@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  runtime:
+    image: dunglas/frankenphp:1.2
+    container_name: runtime-supercharger
+    working_dir: /app
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: "1"
+      APP_RUNTIME: "Runtime\FrankenPhpSymfony\Runtime"
+      FRANKENPHP_CONFIG: "worker ./public/index.php"
+      MAX_REQUESTS: "500"
+      MAX_CONSECUTIVE_FAILURES: "5"
+    volumes:
+      - ../../:/app:rw
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

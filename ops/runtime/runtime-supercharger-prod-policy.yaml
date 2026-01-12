@@ -1,0 +1,28 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# runtime-supercharger-prod-policy.yaml
+# Human-readable ops policy. Not consumed by code.
+
+endpoint_security:
+  enabled: true
+  mode: allowlist_or_token
+  token_header: X-Runtime-Token
+  allow_cidr:
+    - 127.0.0.1/8
+    - ::1/128
+
+worker:
+  lifecycle:
+    enabled: true
+    max_request: 1000
+    max_memory_mb: 512
+    max_uptime_second: 3600
+    drain_second: 10
+  reset:
+    enabled: true
+    kernel: true
+    doctrine: true
+
+engine_preference:
+  primary: roadrunner
+  secondary: frankenphp
+  optional: swoole

@@ -1,0 +1,9 @@
+# values-dev.yaml overlay for charts using Runtime Supercharger
+runtime:
+  enabled: true
+  driver: frankenphp
+  env:
+    APP_RUNTIME: "Runtime\FrankenPhpSymfony\Runtime"
+    FRANKENPHP_CONFIG: "worker ./public/index.php"
+    MAX_REQUESTS: "500"
+    MAX_CONSECUTIVE_FAILURES: "5"

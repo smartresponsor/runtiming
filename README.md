@@ -9,3 +9,12 @@ What is new
 - RUNTIME_GATE_ROUTE_LIST: comma-separated list of routes to probe under concurrency.
 - Multi-route probe produces per-route CSV and a combined gate.json decision.
 - Optional: still runs bench harness (sketch-33) as an extra safety check.
+
+Endpoints (short list)
+- /status
+- /runtime/status/host
+- /metrics
+- /runtime/metrics/aggregate
+
+Security note
+- Access is allowlisted and/or token-protected depending on deployment.

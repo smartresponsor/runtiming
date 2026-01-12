@@ -1,0 +1,14 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+{
+  # Enable admin API to restart workers manually if needed:
+  # admin localhost:2019
+}
+
+:80
+
+route {
+  # Worker mode example
+  php_server {
+    env FRANKENPHP_CONFIG "worker ./tool/runtime/worker-frankenphp.php"
+  }
+}

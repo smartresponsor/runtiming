@@ -1,0 +1,13 @@
+<?php
+declare(strict_types=1);
+
+/*
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+*/
+
+namespace App\Tool\Runtime\Fixture;
+
+interface FixtureWorkerSupervisorInterface
+{
+    public function afterRequest(int $statusCode): FixtureWorkerDecision;
+}

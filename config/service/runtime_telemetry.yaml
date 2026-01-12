@@ -1,0 +1,15 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+services:
+  App\Service\Runtime\RuntimeTelemetryJsonCodec: ~
+
+  App\Service\Runtime\RuntimeTelemetryAggregate:
+    arguments:
+      $dir: '%runtime_supercharger_telemetry_dir%'
+      $codec: '@App\Service\Runtime\RuntimeTelemetryJsonCodec'
+
+  App\Service\Runtime\RuntimePrometheusExporter: ~
+
+  App\Http\Runtime\RuntimeMetricsController:
+    arguments:
+      $aggregate: '@App\Service\Runtime\RuntimeTelemetryAggregate'
+      $exporter: '@App\Service\Runtime\RuntimePrometheusExporter'

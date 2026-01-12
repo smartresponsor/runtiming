@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: runtime-supercharger-alert-rule
+  labels:
+    app: runtime-supercharger
+spec:
+  groups:
+    - name: runtime-supercharger.rules
+      rules:
+        - alert: RuntimeWorkerRestartStorm
+          expr: rate(runtime_worker_restart_total[5m]) > 0.05
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Runtime workers restarting too often"
+            description: "Restart rate > 0.05/s for 10m. Check MAX_REQUESTS/memory leaks."
+
+        - alert: RuntimeWorkerMemoryHigh
+          expr: runtime_worker_mem_bytes > 1.5e9
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Runtime worker memory high"
+            description: "Worker memory > 1.5GB for 15m. Consider tighter recycle and resetters."
+
+        - alert: RuntimeRecycleLatencyHigh
+          expr: histogram_quantile(0.95, rate(runtime_recycle_duration_ms_bucket[5m])) > 2000
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Runtime recycle latency high"
+            description: "p95 recycle duration > 2s; may impact tail latency."

@@ -1,0 +1,26 @@
+<?php
+declare(strict_types=1);
+
+/*
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+*/
+
+namespace App\Tool\Runtime\Fixture;
+
+final class FixtureWorkerDecision
+{
+    /** @var array<string, mixed> */
+    private array $data;
+
+    /** @param array<string, mixed> $data */
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return $this->data;
+    }
+}

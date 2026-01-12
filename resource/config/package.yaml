@@ -1,0 +1,8 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+parameters:
+  runtime_supercharger_telemetry_dir: '%env(default:var/runtime/telemetry:RUNTIME_TELEMETRY_DIR)%'
+
+  # Worker reset (env-backed defaults; may be overridden via runtime_supercharger.worker.reset config)
+  runtime_supercharger_worker_reset_enabled: '%env(default:1:RUNTIME_WORKER_RESET_ENABLED)%'
+  runtime_supercharger_worker_reset_kernel: '%env(default:1:RUNTIME_WORKER_RESET_KERNEL)%'
+  runtime_supercharger_worker_reset_doctrine: '%env(default:1:RUNTIME_WORKER_RESET_DOCTRINE)%'

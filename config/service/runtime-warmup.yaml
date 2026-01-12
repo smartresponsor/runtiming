@@ -1,0 +1,13 @@
+services:
+  App\Service\Runtime\RuntimeWarmupService:
+    arguments:
+      $warmerRegistry: '@App\Infra\Runtime\RuntimeWarmerRegistry'
+      $logger: '@logger'
+
+  App\Infra\Runtime\RuntimeWarmerRegistry:
+    arguments:
+      $warmer: !tagged_iterator runtime.warm
+
+  # Example warmers
+  App\Infra\Runtime\DoctrineMetadataWarmer:
+    tags: ['runtime.warm']

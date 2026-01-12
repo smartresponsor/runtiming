@@ -1,0 +1,26 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+services:
+  App\Service\Runtime\RuntimeResetRegistry:
+    arguments:
+      $resetter: !tagged_iterator runtime_supercharger_resetter
+
+  App\ServiceInterface\Runtime\RuntimeResetRegistryInterface: '@App\Service\Runtime\RuntimeResetRegistry'
+
+  App\Service\Runtime\RuntimeKernelResetter:
+    arguments:
+      $enabled: '%runtime_supercharger_worker_reset_kernel%'
+      $servicesResetter: '@?services_resetter'
+    tags: ['runtime_supercharger_resetter']
+
+  App\Service\Runtime\RuntimeDoctrineResetter:
+    arguments:
+      $enabled: '%runtime_supercharger_worker_reset_doctrine%'
+      $doctrine: '@?doctrine'
+    tags: ['runtime_supercharger_resetter']
+
+  App\Http\Runtime\RuntimeWorkerResetSubscriber:
+    arguments:
+      $enabled: '%runtime_supercharger_worker_reset_enabled%'
+      $registry: '@App\ServiceInterface\Runtime\RuntimeResetRegistryInterface'
+      $state: '@?App\ServiceInterface\Runtime\RuntimeWorkerStateInterface'
+    tags: ['kernel.event_subscriber']

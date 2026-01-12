@@ -1,0 +1,13 @@
+services:
+  App\Service\Runtime\RuntimeSuperchargerService:
+    arguments:
+      $resetterRegistry: '@App\Infra\Runtime\RuntimeResetterRegistry'
+      $logger: '@logger'
+
+  App\Infra\Runtime\RuntimeResetterRegistry:
+    arguments:
+      $resetter: !tagged_iterator runtime.reset
+
+  # Default resetters
+  App\Infra\Runtime\DoctrineEntityManagerResetter:
+    tags: ['runtime.reset']

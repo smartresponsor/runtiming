@@ -1,0 +1,17 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+version: "3"
+
+server:
+  command: "php worker/rr-worker.php"
+  relay: "pipes"
+
+http:
+  address: "127.0.0.1:8080"
+  middleware: ["headers"]
+  pool:
+    num_workers: 4
+    max_jobs: 0
+
+headers:
+  response:
+    X-Runtime-Engine: "rr"

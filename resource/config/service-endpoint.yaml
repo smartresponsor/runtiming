@@ -1,0 +1,10 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+services:
+  App\Service\Runtime\RuntimeEndpointGuard:
+    arguments:
+      $enabled: '%runtime_supercharger_endpoint_security_enabled%'
+      $mode: '%runtime_supercharger_endpoint_security_mode%'
+      $allowCidr: '%runtime_supercharger_endpoint_security_allow_cidr%'
+      $token: '%runtime_supercharger_endpoint_security_token%'
+      $header: '%runtime_supercharger_endpoint_security_header%'
+      $proxyStrict: '%runtime_supercharger_endpoint_proxy_strict%'

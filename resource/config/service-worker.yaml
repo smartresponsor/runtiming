@@ -1,0 +1,29 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+services:
+  App\Service\Runtime\RuntimeWorkerState:
+    arguments:
+      $drainSecond: '%runtime_supercharger_worker_drain_second%'
+
+  App\ServiceInterface\Runtime\RuntimeWorkerStateInterface: '@App\Service\Runtime\RuntimeWorkerState'
+
+  App\Service\Runtime\RuntimeWorkerLifecyclePolicy:
+    arguments:
+      $enabled: '%runtime_supercharger_worker_lifecycle_enabled%'
+      $maxRequest: '%runtime_supercharger_worker_max_request%'
+      $maxMemoryMb: '%runtime_supercharger_worker_max_memory_mb%'
+      $maxUptimeSecond: '%runtime_supercharger_worker_max_uptime_second%'
+
+  App\ServiceInterface\Runtime\RuntimeWorkerLifecyclePolicyInterface: '@App\Service\Runtime\RuntimeWorkerLifecyclePolicy'
+
+  App\Service\Runtime\RuntimeWorkerTerminator:
+    arguments:
+      $enabled: '%runtime_supercharger_worker_lifecycle_enabled%'
+
+  App\ServiceInterface\Runtime\RuntimeWorkerTerminatorInterface: '@App\Service\Runtime\RuntimeWorkerTerminator'
+
+  App\Http\Runtime\RuntimeWorkerLifecycleSubscriber:
+    arguments:
+      $state: '@App\ServiceInterface\Runtime\RuntimeWorkerStateInterface'
+      $policy: '@App\ServiceInterface\Runtime\RuntimeWorkerLifecyclePolicyInterface'
+      $terminator: '@App\ServiceInterface\Runtime\RuntimeWorkerTerminatorInterface'
+    tags: ['kernel.event_subscriber']

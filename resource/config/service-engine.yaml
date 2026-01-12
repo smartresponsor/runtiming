@@ -1,0 +1,6 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+services:
+  App\Service\Runtime\RuntimeEngineDetector:
+    arguments:
+      $engine: '%runtime_supercharger_engine%'
+  App\ServiceInterface\Runtime\RuntimeEngineDetectorInterface: '@App\Service\Runtime\RuntimeEngineDetector'

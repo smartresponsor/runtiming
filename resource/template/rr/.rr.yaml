@@ -1,0 +1,40 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# .rr.yaml (template) — RoadRunner v2025 profile for Symfony
+# Place this file at project root as ".rr.yaml"
+# Requirements: rr binary + php
+
+version: "3"
+
+rpc:
+  listen: tcp://127.0.0.1:6001
+
+server:
+  # Adjust command to your app entrypoint.
+  # Common: "php public/index.php" (when app is compatible with worker mode)
+  command: "php public/index.php"
+  relay: "pipes"
+
+http:
+  address: "0.0.0.0:8080"
+  pool:
+    # RR will restart workers itself when max_jobs is reached.
+    # Runtime lifecycle policy also triggers exit(0) after response when needed.
+    num_workers: 4
+    max_jobs: 0
+  middleware: [ "headers", "gzip" ]
+  headers:
+    response:
+      X-Powered-By: "runtime-supercharger"
+
+logs:
+  level: "info"
+  mode: "production"
+  output: "stderr"
+
+# Optional: automatic reload (dev only)
+# reload:
+#   interval: 1s
+#   patterns: [ ".php", ".yaml", ".yml" ]
+#   services:
+#     http:
+#       dirs: [ "." ]

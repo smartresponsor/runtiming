@@ -1,0 +1,19 @@
+{
+  # Caddy global options
+  admin off
+}
+
+:8080 {
+  root * /app/public
+  encode zstd gzip
+
+  php_server {
+    # FrankenPHP worker-mode
+    worker ./public/index.php
+    env APP_RUNTIME "Runtime\FrankenPhpSymfony\Runtime"
+    env MAX_REQUESTS "500"
+    env MAX_CONSECUTIVE_FAILURES "5"
+  }
+
+  file_server
+}

@@ -1,0 +1,22 @@
+Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Minimal RoadRunner config for Runtime Supercharger worker.
+# Save as .rr.yaml (the name is up to you).
+
+version: "3"
+
+server:
+  command: "php tool/runtime/worker-roadrunner.php"
+  relay: "pipes"
+
+http:
+  address: 0.0.0.0:8080
+  pool:
+    num_workers: 4
+    max_jobs: 0
+    supervisor:
+      max_worker_memory: 256
+
+# Optional: enable for dev hot reload (restarts workers after each request)
+# http:
+#   pool:
+#     debug: true

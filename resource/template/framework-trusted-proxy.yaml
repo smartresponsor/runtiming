@@ -1,0 +1,7 @@
+# config/packages/framework.yaml
+framework:
+  # ...
+  # Option 1: set env vars and keep config empty
+  # Option 2: configure trusted proxies directly (comma-separated string)
+  trusted_proxies: '%env(default::SYMFONY_TRUSTED_PROXIES)%'
+  trusted_headers: '%env(default::SYMFONY_TRUSTED_HEADERS)%'

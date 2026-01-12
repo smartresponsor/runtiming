@@ -1,0 +1,12 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# runtime-supercharger-slo-gate.yaml
+# Human-readable gate defaults for read paths.
+
+gate:
+  mode: read
+  p95_ms_max: 250
+  fail_rate_max: 0.005
+
+note:
+  - For write paths you may use p95_ms_max: 700.
+  - This file is informational; gate scripts read env vars.

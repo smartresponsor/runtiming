@@ -11,6 +11,20 @@ use App\ServiceInterface\Runtime\RuntimeTelemetrySnapshot;
 
 final class RuntimeTelemetryJsonCodec
 {
+    public function encode(RuntimeTelemetrySnapshot $snapshot): string
+    {
+        $payload = [
+            'namespace' => $snapshot->namespace,
+            'counter' => $snapshot->counter,
+            'gauge' => $snapshot->gauge,
+            'meta' => $snapshot->meta,
+        ];
+
+        $json = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        return is_string($json) ? $json : '{}';
+    }
+
     public function decode(string $json): ?RuntimeTelemetrySnapshot
     {
         $data = json_decode($json, true);

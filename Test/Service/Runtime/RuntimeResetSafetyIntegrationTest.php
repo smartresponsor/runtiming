@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../Fixture/RuntimeStateSafetyFixtureTest.php';
 
 use App\Infra\Runtime\RuntimeResetterRegistry;
 use App\Service\Runtime\RuntimeSuperchargerService;
-use Fixture\RuntimeStateSafetyFixtureTest;
+use App\Test\Fixture\RuntimeStateSafetyFixtureTest;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 

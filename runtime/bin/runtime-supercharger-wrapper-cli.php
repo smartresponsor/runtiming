@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-/*
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-*/
+
 
 require_once __DIR__ . '/../../src/ServiceInterface/Runtime/RunnerRequest.php';
 require_once __DIR__ . '/../../src/ServiceInterface/Runtime/RunnerResponse.php';

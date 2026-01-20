@@ -1,17 +1,18 @@
 <?php
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
-/*
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-*/
+
+
 
 namespace App\Http\Runtime;
 
 use App\Service\Runtime\RuntimeStatusProvider;
 use App\Service\Runtime\RuntimeTelemetryDirInspector;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\HttpInterface\Runtime\RuntimeStatusControllerInterface;
 
-final class RuntimeStatusController
+final class RuntimeStatusController implements RuntimeStatusControllerInterface
 {
     private RuntimeStatusProvider $provider;
     private RuntimeTelemetryDirInspector $inspector;

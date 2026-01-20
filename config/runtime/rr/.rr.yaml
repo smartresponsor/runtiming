@@ -1,0 +1,17 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Minimal RoadRunner HTTP config for Symfony Runtime (Nyholm).
+
+version: "3"
+
+server:
+  command: "php public/index.php"
+  env:
+    APP_ENV: "dev"
+    APP_DEBUG: "1"
+    APP_RUNTIME: "Runtime\RoadRunnerSymfonyNyholm\Runtime"
+
+http:
+  address: "0.0.0.0:8081"
+  pool:
+    num_workers: 4
+    max_jobs: 0

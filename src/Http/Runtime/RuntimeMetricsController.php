@@ -1,9 +1,9 @@
 <?php
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
-/*
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-*/
+
+
 
 namespace App\Http\Runtime;
 
@@ -11,8 +11,9 @@ use App\Service\Runtime\RuntimePrometheusExporter;
 use App\Service\Runtime\RuntimeTelemetryAggregate;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use App\HttpInterface\Runtime\RuntimeMetricsControllerInterface;
 
-final class RuntimeMetricsController
+final class RuntimeMetricsController implements RuntimeMetricsControllerInterface
 {
     private RuntimeTelemetryAggregate $aggregate;
     private RuntimePrometheusExporter $exporter;

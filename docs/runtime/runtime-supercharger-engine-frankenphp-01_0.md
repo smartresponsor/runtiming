@@ -28,15 +28,15 @@ Run (example)
 1) Ensure frankenphp binary is installed and available on PATH.
 2) Ensure composer deps for your app are installed.
 3) Start in worker mode from project root:
-   frankenphp php-server --worker ./worker/frankenphp-worker.php -l 127.0.0.1:8080
+   frankenphp php-server --worker ./tools/runtime/worker-frankenphp.php -l 127.0.0.1:8080
 4) Import runtime routes from sketches 23/24.
 5) Verify:
    GET http://127.0.0.1:8080/status
    GET http://127.0.0.1:8080/metrics
 
 Smoke
-- Windows: tool/runtime/frankenphp-smoke.ps1
-- Linux/macOS: tool/runtime/frankenphp-smoke.sh
+- Windows: tools/runtime/frankenphp-smoke.ps1
+- Linux/macOS: tools/runtime/frankenphp-smoke.sh
 
 Notes
 - Worker script follows the official FrankenPHP worker pattern (frankenphp_handle_request() loop).

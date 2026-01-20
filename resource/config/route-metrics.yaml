@@ -1,4 +1,4 @@
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 runtime_telemetry_metrics:
   path: /metrics
   controller: App\Http\Runtime\RuntimeMetricsController::metrics

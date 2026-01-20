@@ -1,4 +1,4 @@
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 runtime_status_worker:
   path: /status
   controller: App\Http\Runtime\RuntimeStatusController::worker

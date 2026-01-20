@@ -1,4 +1,4 @@
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 $ErrorActionPreference = "Stop"
 
 Write-Host "This profile is documentation-first."

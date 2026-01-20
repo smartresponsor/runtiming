@@ -1,4 +1,4 @@
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 $ErrorActionPreference = "Stop"
 
 function Find-RR {

@@ -1,13 +1,13 @@
 <?php
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
-/*
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-*/
+
+
 
 namespace App\Infra\Runtime;
 
-use App\InfraInterface\Runtime\RuntimeSuperchargerConfigProviderInterface;
+use App\RuntimeInterface\RuntimeSuperchargerConfigProviderInterface;
 use App\Service\Runtime\RuntimeSuperchargerConfigValidator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

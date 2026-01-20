@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infra\Runtime;
 
-use App\InfraInterface\Runtime\RuntimeWarmerInterface;
+use App\RuntimeInterface\RuntimeWarmerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**

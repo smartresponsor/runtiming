@@ -14,8 +14,8 @@ Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 
     <testsuites>
         <testsuite name="Runtime Supercharger">
-            <directory suffix="Test.php">test</directory>
-            <directory suffix="-test.php">test</directory>
+            <directory suffix="Test.php">Test</directory>
+            <directory suffix="-test.php">Test</directory>
         </testsuite>
     </testsuites>
 

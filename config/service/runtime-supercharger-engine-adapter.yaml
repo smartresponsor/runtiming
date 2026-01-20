@@ -1,0 +1,7 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+#
+# These adapters are used from a wrapper/runner, not from Symfony container by default.
+# The 'core' adapter (policy) is pure PHP and can be registered if needed.
+#
+# services:
+#   App\Service\Runtime\RuntimeEngineAdapter: ~

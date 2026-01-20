@@ -1,9 +1,9 @@
 <?php
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
-/*
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-*/
+
+
 
 namespace App\Runtime\DependencyInjection;
 
@@ -20,7 +20,9 @@ final class RuntimeSuperchargerExtension extends Extension
         $configuration = new RuntimeSuperchargerConfiguration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../resource/config'));
+        // This bundle is distributed as a standalone package, where service configs live at the repo root.
+        // Keep the locator stable to avoid breakage when the bundle is installed via a path repository.
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../../resource/config'));
 
         $loader->load('package.yaml');
         $loader->load('service-core.yaml');

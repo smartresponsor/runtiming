@@ -1,0 +1,11 @@
+<?php
+declare(strict_types=1);
+
+
+
+namespace App\ServiceInterface\Runtime;
+
+interface RuntimeTelemetrySinkInterface
+{
+    public function flush(RuntimeTelemetrySnapshot $snapshot): void;
+}

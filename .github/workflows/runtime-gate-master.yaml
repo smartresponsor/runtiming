@@ -1,0 +1,66 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+
+name: runtime-gate-master
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - ".github/workflows/**"
+      - "src/**"
+      - "test/**"
+      - "config/**"
+      - "resource/**"
+      - "tools/**"
+      - "docs/**"
+      - "ops/**"
+      - "composer.json"
+      - "composer.lock"
+      - "phpunit.xml.dist"
+      - "phpstan.neon"
+  pull_request:
+    branches: ["master"]
+    paths:
+      - ".github/workflows/**"
+      - "src/**"
+      - "test/**"
+      - "config/**"
+      - "resource/**"
+      - "tools/**"
+      - "docs/**"
+      - "ops/**"
+      - "composer.json"
+      - "composer.lock"
+      - "phpunit.xml.dist"
+      - "phpstan.neon"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    env:
+      COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ github.token }}"}}'
+      COMPOSER_NO_INTERACTION: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      - name: Runtime Supercharger CI gate
+        shell: bash
+        run: |
+          chmod +x tools/runtime/ci-gate.sh
+          bash tools/runtime/ci-gate.sh

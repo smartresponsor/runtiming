@@ -23,12 +23,12 @@ See public/index.php.example.patch.
 - docker/runtime/compose.yaml provides a default dev/stage start.
 
 4. Validate state-safety
-- Run tool/runtime/smoke-runtime.sh (basic request loop + memory check).
+- Run tools/runtime/smoke-runtime.sh (basic request loop + memory check).
 - If memory grows linearly, reduce MAX_REQUESTS and add resetters (sketch-3).
 
 5. Validate perf
-- Run tool/runtime/bench-wrk.sh   (baseline)
-- Run tool/runtime/bench-k6.js    (trend)
+- Run tools/runtime/bench-wrk.sh   (baseline)
+- Run tools/runtime/bench-k6.js    (trend)
 
 6. Adopt in Helm
 - Copy ops/runtime/values-*.yaml overlays into your chart release.

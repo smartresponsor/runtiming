@@ -1,6 +1,15 @@
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 parameters:
   runtime_supercharger_telemetry_dir: '%env(default:var/runtime/telemetry:RUNTIME_TELEMETRY_DIR)%'
+
+  # Endpoint security (secure-default; may be overridden via runtime_supercharger.endpoint_security config)
+  runtime_supercharger_endpoint_security_enabled: '%env(default:1:RUNTIME_ENDPOINT_SECURITY_ENABLED)%'
+  runtime_supercharger_endpoint_allow_cidr: '%env(default:127.0.0.1/32:RUNTIME_ENDPOINT_ALLOW_CIDR)%'
+  runtime_supercharger_endpoint_security_mode: '%env(default:allowlist:RUNTIME_ENDPOINT_SECURITY_MODE)%'
+
+  # Worker lifecycle (env-backed defaults; may be overridden via runtime_supercharger.worker config)
+  runtime_supercharger_worker_max_request: '%env(default:1000:RUNTIME_WORKER_MAX_REQUEST)%'
+  runtime_supercharger_worker_max_memory_mb: '%env(default:512:RUNTIME_WORKER_MAX_MEMORY_MB)%'
 
   # Worker reset (env-backed defaults; may be overridden via runtime_supercharger.worker.reset config)
   runtime_supercharger_worker_reset_enabled: '%env(default:1:RUNTIME_WORKER_RESET_ENABLED)%'

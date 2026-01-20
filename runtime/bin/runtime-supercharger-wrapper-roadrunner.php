@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-/*
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-*/
+
 
 /**
  * RoadRunner worker wrapper pattern (no RR SDK in this sketch).

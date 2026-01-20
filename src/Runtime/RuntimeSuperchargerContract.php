@@ -1,13 +1,13 @@
 <?php
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
-/*
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-*/
+
+
 
 namespace App\Runtime;
 
-final class RuntimeSuperchargerContract
+final class RuntimeSuperchargerContract implements RuntimeSuperchargerContractInterface
 {
     public const CONFIG_ROOT = 'runtime_supercharger';
 

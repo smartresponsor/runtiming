@@ -1,4 +1,4 @@
-Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 services:
   App\Service\Runtime\RuntimeWorkerState:
     arguments:

@@ -19,7 +19,7 @@ on:
       - "phpunit.xml.dist"
       - "phpstan.neon"
   pull_request:
-    branches: ["master"]
+    branches: [ "master" ]
     paths:
       - ".github/workflows/**"
       - "src/**"

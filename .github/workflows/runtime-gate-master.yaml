@@ -8,7 +8,7 @@ on:
     paths:
       - ".github/workflows/**"
       - "src/**"
-      - "test/**"
+      - "Test/**"
       - "config/**"
       - "resource/**"
       - "tools/**"
@@ -23,7 +23,7 @@ on:
     paths:
       - ".github/workflows/**"
       - "src/**"
-      - "test/**"
+      - "Test/**"
       - "config/**"
       - "resource/**"
       - "tools/**"

@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 name: build-test-gate
 
 on:
@@ -27,7 +28,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          php phpunit.phar --bootstrap tools/runtime/phpunit-bootstrap.php test
+          php phpunit.phar --bootstrap tools/runtime/phpunit-bootstrap.php Test
 
       - name: Run runtime gate
         run: |

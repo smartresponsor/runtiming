@@ -1,4 +1,5 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
+
 set -euo pipefail
 
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp

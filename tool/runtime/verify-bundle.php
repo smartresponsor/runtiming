@@ -33,7 +33,7 @@ foreach ($expect as $rel) {
 }
 
 $checks = [
-    'resource/config/route-metrics.yaml' => ['/metrics', '/runtime/metrics/aggregate', 'RuntimeMetricsController'],
+    'resource/config/route-metrics.yaml' => ['/metrics', '/runtime/metrics/aggregate', 'RuntimeMetricController'],
     'resource/config/route-status.yaml' => ['/status', '/runtime/status/host', 'RuntimeStatusController'],
     'resource/config/service-core.yaml' => ['runtime_supercharger_telemetry_dir', 'RuntimeTelemetryAggregate', 'RuntimePrometheusExporter'],
 ];

@@ -11,9 +11,9 @@ use App\Service\Runtime\RuntimePrometheusExporter;
 use App\Service\Runtime\RuntimeTelemetryAggregate;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use App\HttpInterface\Runtime\RuntimeMetricsControllerInterface;
+use App\HttpInterface\Runtime\RuntimeMetricControllerInterface;
 
-final class RuntimeMetricsController implements RuntimeMetricsControllerInterface
+final class RuntimeMetricController implements RuntimeMetricControllerInterface
 {
     private RuntimeTelemetryAggregate $aggregate;
     private RuntimePrometheusExporter $exporter;
@@ -24,7 +24,7 @@ final class RuntimeMetricsController implements RuntimeMetricsControllerInterfac
         $this->exporter = $exporter;
     }
 
-    public function metrics(): Response
+    public function metric(): Response
     {
         $snap = $this->aggregate->aggregate();
         $text = $this->exporter->export($snap, true);

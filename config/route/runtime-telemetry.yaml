@@ -1,10 +1,10 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-runtime_telemetry_metrics:
+runtime_telemetry_metric:
   path: /metrics
-  controller: App\Http\Runtime\RuntimeMetricsController::metrics
+  controller: App\Http\Runtime\RuntimeMetricController::metric
   methods: [GET]
 
 runtime_telemetry_aggregate:
   path: /runtime/metrics/aggregate
-  controller: App\Http\Runtime\RuntimeMetricsController::aggregate
+  controller: App\Http\Runtime\RuntimeMetricController::aggregate
   methods: [GET]

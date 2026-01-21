@@ -9,7 +9,7 @@ services:
 
   App\Service\Runtime\RuntimePrometheusExporter: ~
 
-  App\Http\Runtime\RuntimeMetricsController:
+  App\Http\Runtime\RuntimeMetricController:
     arguments:
       $aggregate: '@App\Service\Runtime\RuntimeTelemetryAggregate'
       $exporter: '@App\Service\Runtime\RuntimePrometheusExporter'

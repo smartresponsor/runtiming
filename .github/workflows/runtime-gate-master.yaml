@@ -4,7 +4,7 @@ name: runtime-gate-master
 
 on:
   push:
-    branches: ["master"]
+    branches: [ "master" ]
     paths:
       - ".github/workflows/**"
       - "src/**"
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ github.token }}"}}'
+      COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ COMPOSER_AUTH }}"}}'
       COMPOSER_NO_INTERACTION: "1"
 
     steps:

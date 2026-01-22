@@ -40,6 +40,9 @@ php tools/runtime/verify-worker-lifecycle.php
 echo "ci-gate: verify worker reset pack"
 php tools/runtime/verify-worker-reset.php
 
+echo "ci-gate: runtime state scan"
+bash tools/runtime/run-state-scan.sh
+
 echo "ci-gate: metric contract"
 bash tools/runtime/check-metric-contract.sh "${RUNTIME_METRIC_BASE_URL:-http://127.0.0.1:8080}"
 

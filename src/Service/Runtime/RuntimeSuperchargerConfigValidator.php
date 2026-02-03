@@ -2,9 +2,6 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
-
-
-
 namespace App\Service\Runtime;
 
 use App\ServiceInterface\Runtime\RuntimeSuperchargerConfigInterface;
@@ -45,7 +42,7 @@ final class RuntimeSuperchargerConfigValidator implements RuntimeSuperchargerCon
         if ($path === '') {
             $r->add(new RuntimeValidationIssue('feedPath', 'feedPath must be non-empty'));
         } elseif (!str_ends_with($path, '.ndjson')) {
-            $r->add(new RuntimeValidationIssue('feedPath.ext', 'feedPath must end with .ndjson', ['value' => $config->getFeedPath()]));
+            $r->add(new RuntimeValidationIssue('feedPath.ext', 'feedPath must end with .ndjson', ['value' => $path]));
         }
 
         if ($config->getFeedMaxBytes() < 1024) {

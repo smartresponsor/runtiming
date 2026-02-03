@@ -33,7 +33,7 @@ final class RuntimeEventFileSink implements RuntimeEventSinkInterface
         $this->rotateIfNeeded();
 
         $line = json_encode([
-            'ts' => gmdate('c') . 'Z',
+            'ts' => gmdate('Y-m-d\\TH:i:s\\Z'),
             'type' => $type,
         ] + $payload, JSON_UNESCAPED_SLASHES);
 
@@ -41,7 +41,7 @@ final class RuntimeEventFileSink implements RuntimeEventSinkInterface
             return;
         }
 
-        @file_put_contents($this->path, $line . "\n", FILE_APPEND);
+        @file_put_contents($this->path, $line . "\n", FILE_APPEND | LOCK_EX);
     }
 
     private function rotateIfNeeded(): void

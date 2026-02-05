@@ -22,7 +22,7 @@ RUN_BENCH="${RUNTIME_GATE_RUN_BENCH:-1}"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 STAMP="$(date +%Y%m%dT%H%M%S)"
-OUT_DIR="$ROOT/report/runtime/gate/$STAMP"
+OUT_DIR="${RUNTIME_GATE_OUT_DIR:-$ROOT/report/runtime/gate/$STAMP}"
 ROUTE_DIR="$OUT_DIR/route"
 mkdir -p "$ROUTE_DIR"
 

@@ -1,45 +1,44 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-
 name: runtime-gate-master
 
 on:
   push:
-    branches: [ "master" ]
-    paths:
-      - ".github/workflows/**"
-      - "src/**"
-      - "Test/**"
-      - "config/**"
-      - "resource/**"
-      - "tools/**"
-      - "docs/**"
-      - "ops/**"
-      - "composer.json"
-      - "composer.lock"
-      - "phpunit.xml.dist"
-      - "phpstan.neon"
-  pull_request:
     branches: ["master"]
     paths:
-      - ".github/workflows/**"
-      - "src/**"
-      - "Test/**"
-      - "config/**"
-      - "resource/**"
-      - "tools/**"
-      - "docs/**"
-      - "ops/**"
-      - "composer.json"
-      - "composer.lock"
-      - "phpunit.xml.dist"
-      - "phpstan.neon"
+      - '.github/workflows/**'
+      - 'src/**'
+      - 'Test/**'
+      - 'config/**'
+      - 'resource/**'
+      - 'tools/**'
+      - 'docs/**'
+      - 'ops/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpunit.xml.dist'
+      - 'phpstan.neon'
+  pull_request:
+    branches: ['master']
+    paths:
+      - '.github/workflows/**'
+      - 'src/**'
+      - 'Test/**'
+      - 'config/**'
+      - 'resource/**'
+      - 'tools/**'
+      - 'docs/**'
+      - 'ops/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpunit.xml.dist'
+      - 'phpstan.neon'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   gate:
@@ -47,20 +46,40 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.COMPOSER_AUTH }}"}}'
-      COMPOSER_NO_INTERACTION: "1"
+      COMPOSER_NO_INTERACTION: '1'
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Setup PHP + Composer cache
+        uses: ./.github/actions/php-runtime-setup
         with:
           php-version: '8.4'
-          tools: composer
+          install-deps: 'true'
 
       - name: Runtime Supercharger CI gate
         shell: bash
         run: |
+          mkdir -p report/runtime/ci
           chmod +x tools/runtime/ci-gate.sh
-          bash tools/runtime/ci-gate.sh
+          RUNTIME_GATE_SKIP_COMPOSER=1 bash tools/runtime/ci-gate.sh
+
+      - name: Collect evidence bundle
+        if: always()
+        shell: bash
+        run: |
+          export RUNTIME_EVIDENCE_OUT_DIR="${GITHUB_WORKSPACE}/report/runtime/ci/evidence"
+          bash tools/runtime/evidence/collect-evidence.sh "${RUNTIME_GATE_BASE_URL:-http://127.0.0.1:8080}" || true
+
+      - name: Upload runtime gate artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-gate-master-evidence
+          if-no-files-found: warn
+          path: |
+            report/runtime/ci/junit.xml
+            report/runtime/ci/phpstan.txt
+            report/runtime/ci/gate/**
+            report/runtime/ci/evidence/**
+            report/runtime/runtime-state-scan-report.ndjson

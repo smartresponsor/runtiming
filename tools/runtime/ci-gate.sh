@@ -46,10 +46,13 @@ bash tools/runtime/run-state-scan.sh
 echo "ci-gate: metric contract"
 bash tools/runtime/check-metric-contract.sh "${RUNTIME_METRIC_BASE_URL:-http://127.0.0.1:8080}"
 
+CI_OUT_DIR="${RUNTIME_CI_OUT_DIR:-$ROOT/report/runtime/ci}"
+mkdir -p "$CI_OUT_DIR"
+
 echo "ci-gate: phpunit"
-vendor/bin/phpunit -c phpunit.xml.dist
+vendor/bin/phpunit -c phpunit.xml.dist --log-junit "$CI_OUT_DIR/junit.xml"
 
 echo "ci-gate: phpstan"
-vendor/bin/phpstan analyse -c phpstan.neon
+vendor/bin/phpstan analyse -c phpstan.neon --no-progress | tee "$CI_OUT_DIR/phpstan.txt"
 
 echo "ci-gate: ok"

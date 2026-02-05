@@ -1,15 +1,13 @@
 <?php
-// Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
 namespace App\Test\Fixture;
 
+use App\ServiceInterface\Runtime\RuntimeResetReport;
+use App\ServiceInterface\Runtime\RuntimeResetterInterface;
 use PHPUnit\Framework\TestCase;
-use Symfony\Contracts\Service\ResetInterface;
 
-/**
- *
- */
 final class RuntimeStateSafetyFixtureTest extends TestCase
 {
     public const SEED = [
@@ -22,7 +20,7 @@ final class RuntimeStateSafetyFixtureTest extends TestCase
         return new RuntimeStateProbe();
     }
 
-    public static function resetter(RuntimeStateProbe $probe): ResetInterface
+    public static function resetter(RuntimeStateProbe $probe): RuntimeResetterInterface
     {
         return new RuntimeStateResetter($probe);
     }
@@ -54,7 +52,7 @@ final class RuntimeStateProbe
     }
 }
 
-final class RuntimeStateResetter implements ResetInterface
+final class RuntimeStateResetter implements RuntimeResetterInterface
 {
     private RuntimeStateProbe $probe;
 
@@ -63,7 +61,7 @@ final class RuntimeStateResetter implements ResetInterface
         $this->probe = $probe;
     }
 
-    public function reset(): void
+    public function reset(RuntimeResetReport $report): void
     {
         $this->probe->resetState();
     }

@@ -6,6 +6,10 @@ services:
 
   App\ServiceInterface\Runtime\RuntimeResetRegistryInterface: '@App\Service\Runtime\RuntimeResetRegistry'
 
+  App\Infra\Runtime\RuntimeResetterRegistry:
+    arguments:
+      $registry: '@App\ServiceInterface\Runtime\RuntimeResetRegistryInterface'
+
   App\Service\Runtime\RuntimeKernelResetter:
     arguments:
       $enabled: '%runtime_supercharger_worker_reset_kernel%'

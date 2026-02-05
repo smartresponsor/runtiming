@@ -37,3 +37,9 @@ Runtime endpoint guard P0 matrix
 - Added branch-complete unit matrix for RuntimeEndpointGuard decision paths (mode, token parsing, proxy strict/trust, CIDR IPv4/IPv6, parse errors): `Test/Service/Runtime/RuntimeEndpointGuardTest.php`
 - Added concise scenario-to-assertion mapping doc: `docs/runtime/security-endpoint-guard-test-matrix.md`
 - Added focused smoke runner for the guard test group: `tools/smoke/runtime-endpoint-guard.sh`
+
+Reset registry convergence (P0)
+- Canonical reset spine is `App\ServiceInterface\Runtime\RuntimeResetRegistryInterface` backed by `App\Service\Runtime\RuntimeResetRegistry`.
+- Legacy `App\Infra\Runtime\RuntimeResetterRegistry` is now an adapter over the canonical interface and marked deprecated (1.4.0 -> 1.6.0 window; warning only in dev/test).
+- Deprecated `RuntimeSuperchargerService` now uses the canonical registry interface internally to avoid parallel reset paths.
+- Architecture note added: `docs/runtime/reset-architecture.md`.

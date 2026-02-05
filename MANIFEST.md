@@ -49,3 +49,7 @@ Config normalization (P1)
 - Legacy underscore names and `config/services/*` paths remain as import-only shims.
 - Removal window for config aliases is documented in `docs/runtime/config-compatibility.md` (target: 2026-06-30).
 
+
+Extension loader refactor (P1)
+- `RuntimeSuperchargerExtension::load()` was decomposed into focused private loaders/overrides (`loadCoreServices`, `loadEndpoint`, `loadLifecycle`, `loadReset`, `applyParameterOverride` + small helpers) with preserved behavior and load order.
+- Extension test coverage now includes feature-toggle branches (endpoint on/off, lifecycle/reset toggles) and worker override coercion paths.

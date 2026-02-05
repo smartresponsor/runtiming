@@ -25,6 +25,14 @@ Key areas
 - config/runtime/rr: RoadRunner configs
 - config/runtime/frankenphp: FrankenPHP Caddyfile + env
 
+
+Runtime docs navigation (P2)
+- README now includes: docs index, 4-flow architecture map (telemetry/reset/lifecycle/endpoint security), PHP/Symfony support matrix (tested vs supported), and direct links to runbook/SLO/dashboard assets.
+- Primary ops links:
+  - Runbook: `docs/runtime/runtime-supercharger-prod-runbook-01_0.md`
+  - SLO/policy: `ops/runtime/runtime-supercharger-slo-gate.yaml`, `ops/runtime/runtime-supercharger-prod-policy.yaml`
+  - Dashboard/alerts: `ops/runtime/grafana/runtime-supercharger-dashboard.json`, `ops/runtime/prometheus/runtime-supercharger-alert-rule.yaml`
+
 Ops assets
 - ops/runtime/grafana: dashboard JSON (Prometheus)
 - ops/runtime/prometheus: ServiceMonitor + PrometheusRule

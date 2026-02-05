@@ -1,37 +1,46 @@
 <?php
-// Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
 namespace App\Service\Runtime;
 
 use App\ServiceInterface\Runtime\RuntimeSuperchargerServiceInterface;
-use App\Infra\Runtime\RuntimeResetterRegistry;
+use App\ServiceInterface\Runtime\RuntimeResetRegistryInterface;
 use Psr\Log\LoggerInterface;
-use Throwable;
 
+/**
+ * @deprecated since 1.4.0, to be removed in 1.6.0. Use RuntimeSupercharger or RuntimeResetRegistryInterface directly.
+ */
 final class RuntimeSuperchargerService implements RuntimeSuperchargerServiceInterface
 {
-    private RuntimeResetterRegistry $resetterRegistry;
+    private RuntimeResetRegistryInterface $registry;
     private LoggerInterface $logger;
 
-    public function __construct(RuntimeResetterRegistry $resetterRegistry, LoggerInterface $logger)
+    public function __construct(RuntimeResetRegistryInterface $registry, LoggerInterface $logger)
     {
-        $this->resetterRegistry = $resetterRegistry;
+        $this->registry = $registry;
         $this->logger = $logger;
+
+        if ($this->shouldTriggerDeprecation()) {
+            @trigger_error(self::class . ' is deprecated since 1.4.0 and will be removed in 1.6.0. Use RuntimeSupercharger or RuntimeResetRegistryInterface.', E_USER_DEPRECATED);
+        }
     }
 
     public function resetAfterRequest(): void
     {
-        foreach ($this->resetterRegistry->all() as $resetter) {
-            try {
-                $resetter->reset();
-            } catch (Throwable $e) {
-                // Do not stop the request-cycle. Record and continue.
-                $this->logger->error('Runtime resetter failed', [
-                    'resetter' => get_class($resetter),
-                    'error' => $e->getMessage(),
-                ]);
-            }
+        $report = $this->registry->resetAll();
+
+        foreach ($report->error as $errorMessage) {
+            $this->logger->error('Runtime resetter failed', [
+                'error' => $errorMessage,
+            ]);
         }
+    }
+
+    private function shouldTriggerDeprecation(): bool
+    {
+        $env = (string) ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? getenv('APP_ENV') ?: '');
+
+        return $env === 'dev' || $env === 'test';
     }
 }

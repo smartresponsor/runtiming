@@ -1,29 +1,38 @@
 <?php
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
 namespace App\Test\Service\Runtime;
 
-
-use App\Infra\Runtime\RuntimeResetterRegistry;
+use App\Service\Runtime\RuntimeResetRegistry;
 use App\Service\Runtime\RuntimeSuperchargerService;
+use App\ServiceInterface\Runtime\RuntimeResetReport;
+use App\ServiceInterface\Runtime\RuntimeResetterInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
-use Symfony\Contracts\Service\ResetInterface;
 
 final class RuntimeSuperchargerServiceTest extends TestCase
 {
     public function testResetAfterRequestCallsAllResetter(): void
     {
-        $a = new class implements ResetInterface {
+        $a = new class implements RuntimeResetterInterface {
             public int $count = 0;
-            public function reset(): void { $this->count++; }
+
+            public function reset(RuntimeResetReport $report): void
+            {
+                $this->count++;
+            }
         };
-        $b = new class implements ResetInterface {
+        $b = new class implements RuntimeResetterInterface {
             public int $count = 0;
-            public function reset(): void { $this->count++; }
+
+            public function reset(RuntimeResetReport $report): void
+            {
+                $this->count++;
+            }
         };
 
-        $registry = new RuntimeResetterRegistry([$a, $b]);
+        $registry = new RuntimeResetRegistry([$a, $b]);
         $svc = new RuntimeSuperchargerService($registry, new NullLogger());
 
         $svc->resetAfterRequest();
@@ -35,15 +44,22 @@ final class RuntimeSuperchargerServiceTest extends TestCase
 
     public function testResetAfterRequestDoesNotStopOnFailure(): void
     {
-        $ok = new class implements ResetInterface {
+        $ok = new class implements RuntimeResetterInterface {
             public int $count = 0;
-            public function reset(): void { $this->count++; }
+
+            public function reset(RuntimeResetReport $report): void
+            {
+                $this->count++;
+            }
         };
-        $bad = new class implements ResetInterface {
-            public function reset(): void { throw new \RuntimeException('boom'); }
+        $bad = new class implements RuntimeResetterInterface {
+            public function reset(RuntimeResetReport $report): void
+            {
+                throw new \RuntimeException('boom');
+            }
         };
 
-        $registry = new RuntimeResetterRegistry([$bad, $ok]);
+        $registry = new RuntimeResetRegistry([$bad, $ok]);
         $svc = new RuntimeSuperchargerService($registry, new NullLogger());
 
         $svc->resetAfterRequest();

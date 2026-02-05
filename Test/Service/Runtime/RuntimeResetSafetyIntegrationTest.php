@@ -1,12 +1,12 @@
 <?php
-// Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 declare(strict_types=1);
 
 namespace App\Test\Service\Runtime;
 
 require_once __DIR__ . '/../../Fixture/RuntimeStateSafetyFixtureTest.php';
 
-use App\Infra\Runtime\RuntimeResetterRegistry;
+use App\Service\Runtime\RuntimeResetRegistry;
 use App\Service\Runtime\RuntimeSuperchargerService;
 use App\Test\Fixture\RuntimeStateSafetyFixtureTest;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +18,7 @@ final class RuntimeResetSafetyIntegrationTest extends TestCase
     {
         $probe = RuntimeStateSafetyFixtureTest::probe();
         $resetter = RuntimeStateSafetyFixtureTest::resetter($probe);
-        $registry = new RuntimeResetterRegistry([$resetter]);
+        $registry = new RuntimeResetRegistry([$resetter]);
         $service = new RuntimeSuperchargerService($registry, new NullLogger());
 
         foreach (RuntimeStateSafetyFixtureTest::SEED as $seed) {

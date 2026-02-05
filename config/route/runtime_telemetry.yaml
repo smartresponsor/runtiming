@@ -1,10 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-runtime_telemetry_metric:
-  path: /metrics
-  controller: App\Http\Runtime\RuntimeMetricController::metric
-  methods: [GET]
-
-runtime_telemetry_aggregate:
-  path: /runtime/metrics/aggregate
-  controller: App\Http\Runtime\RuntimeMetricController::aggregate
-  methods: [GET]
+# Deprecated alias: remove after 2026-06-30. Use config/route/runtime-telemetry.yaml.
+imports:
+  - { resource: runtime-telemetry.yaml }

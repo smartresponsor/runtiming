@@ -1,7 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-#
-# These adapters are used from a wrapper/runner, not from Symfony container by default.
-# The 'core' adapter (policy) is pure PHP and can be registered if needed.
-#
-# services:
-#   App\Service\Runtime\RuntimeEngineAdapter: ~
+# Deprecated alias: remove after 2026-06-30. Use config/service/runtime-supercharger-engine-adapter.yaml.
+imports:
+  - { resource: ../service/runtime-supercharger-engine-adapter.yaml }

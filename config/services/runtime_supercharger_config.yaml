@@ -1,19 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-#
-# Example wiring (Symfony).
-#
-# services:
-#   App\Infra\Runtime\RuntimeSuperchargerEnvConfigProvider: ~
-#
-#   App\Service\Runtime\RuntimeSuperchargerConfigValidator: ~
-#
-#   # Symfony Console commands (optional):
-#   App\Infra\Runtime\RuntimeSuperchargerStatusCommand:
-#     arguments:
-#       $provider: '@App\Infra\Runtime\RuntimeSuperchargerEnvConfigProvider'
-#     tags: ['console.command']
-#
-#   App\Infra\Runtime\RuntimeSuperchargerValidateCommand:
-#     arguments:
-#       $provider: '@App\Infra\Runtime\RuntimeSuperchargerEnvConfigProvider'
-#     tags: ['console.command']
+# Deprecated alias: remove after 2026-06-30. Use config/service/runtime-supercharger-config.yaml.
+imports:
+  - { resource: ../service/runtime-supercharger-config.yaml }

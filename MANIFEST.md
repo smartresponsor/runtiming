@@ -43,3 +43,9 @@ Reset registry convergence (P0)
 - Legacy `App\Infra\Runtime\RuntimeResetterRegistry` is now an adapter over the canonical interface and marked deprecated (1.4.0 -> 1.6.0 window; warning only in dev/test).
 - Deprecated `RuntimeSuperchargerService` now uses the canonical registry interface internally to avoid parallel reset paths.
 - Architecture note added: `docs/runtime/reset-architecture.md`.
+
+Config normalization (P1)
+- Canonical config tree uses singular directories (`config/service`, `config/route`, `config/package`) and kebab-case file names.
+- Legacy underscore names and `config/services/*` paths remain as import-only shims.
+- Removal window for config aliases is documented in `docs/runtime/config-compatibility.md` (target: 2026-06-30).
+

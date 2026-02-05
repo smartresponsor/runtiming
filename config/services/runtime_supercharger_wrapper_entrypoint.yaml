@@ -1,3 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-
-# see docs
+# Deprecated alias: remove after 2026-06-30. Use config/service/runtime-supercharger-wrapper-entrypoint.yaml.
+imports:
+  - { resource: ../service/runtime-supercharger-wrapper-entrypoint.yaml }

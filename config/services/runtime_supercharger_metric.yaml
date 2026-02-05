@@ -1,27 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-#
-# Example wiring (Symfony).
-#
-# services:
-#   App\Service\Runtime\RuntimePrometheusRegistry: ~
-#   App\Service\Runtime\RuntimeSuperchargerMetricEmitter:
-#     arguments:
-#       $registry: '@App\Service\Runtime\RuntimePrometheusRegistry'
-#
-#   App\Service\Runtime\RuntimePrometheusFileExporter:
-#     arguments:
-#       $path: '%kernel.project_dir%/var/metric/runtime-supercharger.prom'
-#
-#   # Decorate reset registry:
-#   App\Service\Runtime\RuntimeResetRegistryMetricDecorator:
-#     decorates: App\ServiceInterface\Runtime\RuntimeResetRegistryInterface
-#     arguments:
-#       $inner: '@App\Service\Runtime\RuntimeResetRegistryMetricDecorator.inner'
-#       $emitter: '@App\Service\Runtime\RuntimeSuperchargerMetricEmitter'
-#
-#   # Decorate worker supervisor:
-#   App\Service\Runtime\RuntimeWorkerSupervisorMetricDecorator:
-#     decorates: App\ServiceInterface\Runtime\RuntimeWorkerSupervisorInterface
-#     arguments:
-#       $inner: '@App\Service\Runtime\RuntimeWorkerSupervisorMetricDecorator.inner'
-#       $emitter: '@App\Service\Runtime\RuntimeSuperchargerMetricEmitter'
+# Deprecated alias: remove after 2026-06-30. Use config/service/runtime-supercharger-metric.yaml.
+imports:
+  - { resource: ../service/runtime-supercharger-metric.yaml }

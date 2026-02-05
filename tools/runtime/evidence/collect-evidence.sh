@@ -14,7 +14,7 @@ cd "$ROOT"
 
 TARGET_URL="${1:-http://127.0.0.1:8080}"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
-OUT="report/runtime/evidence/${TS}"
+OUT="${RUNTIME_EVIDENCE_OUT_DIR:-report/runtime/evidence/${TS}}"
 
 mkdir -p "$OUT"
 
@@ -37,12 +37,12 @@ fi
 # Static gate (always available).
 _echo "evidence: run static ci gate"
 chmod +x tools/runtime/ci-gate.sh
-bash tools/runtime/ci-gate.sh > "${OUT}/ci-gate.txt" 2>&1
+RUNTIME_GATE_SKIP_COMPOSER="${RUNTIME_GATE_SKIP_COMPOSER:-1}" bash tools/runtime/ci-gate.sh > "${OUT}/ci-gate.txt" 2>&1
 
 # Optional RC HTTP gate (requires host app).
 if [[ -x "tools/runtime/gate/run-rc-gate.sh" ]]; then
   _echo "evidence: run rc gate (if host is up)"
-  RUNTIME_GATE_BASE_URL="${TARGET_URL}" bash tools/runtime/gate/run-rc-gate.sh > "${OUT}/rc-gate.txt" 2>&1 || true
+  RUNTIME_GATE_BASE_URL="${TARGET_URL}" RUNTIME_GATE_OUT_DIR="${OUT}/gate" bash tools/runtime/gate/run-rc-gate.sh > "${OUT}/rc-gate.txt" 2>&1 || true
 fi
 
 # Optional k6 (baseline only, short).

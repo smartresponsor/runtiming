@@ -53,3 +53,8 @@ Config normalization (P1)
 Extension loader refactor (P1)
 - `RuntimeSuperchargerExtension::load()` was decomposed into focused private loaders/overrides (`loadCoreServices`, `loadEndpoint`, `loadLifecycle`, `loadReset`, `applyParameterOverride` + small helpers) with preserved behavior and load order.
 - Extension test coverage now includes feature-toggle branches (endpoint on/off, lifecycle/reset toggles) and worker override coercion paths.
+
+CI evidence and cache normalization (P2)
+- Runtime CI workflows now share `.github/actions/php-runtime-setup/action.yml` for PHP setup + Composer/vendor caches.
+- Evidence outputs are normalized to stable paths under `report/runtime/ci` for artifact upload.
+- Artifact mapping and retrieval guide: `docs/runtime/ci-evidence.md`.

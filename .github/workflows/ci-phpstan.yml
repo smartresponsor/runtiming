@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp.
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 name: ci-phpstan
 
 on:
@@ -14,13 +14,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Setup PHP + Composer cache
+        uses: ./.github/actions/php-runtime-setup
         with:
           php-version: '8.4'
-
-      - name: Download phpstan
-        run: curl -L -o phpstan.phar https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar
+          install-deps: 'true'
 
       - name: Run phpstan
-        run: php phpstan.phar analyse -c phpstan.neon
+        run: |
+          mkdir -p report/runtime/ci
+          vendor/bin/phpstan analyse -c phpstan.neon --no-progress | tee report/runtime/ci/phpstan.txt
+
+      - name: Upload phpstan artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-phpstan-evidence
+          if-no-files-found: warn
+          path: |
+            report/runtime/ci/phpstan.txt

@@ -32,3 +32,8 @@ Ops assets
 Quick checks
 - CI static gate: tools/runtime/ci-gate.sh (used by .github/workflows/runtime-gate-master.yaml)
 - Local: pwsh tools/runtime/ci-gate.ps1
+
+Runtime endpoint guard P0 matrix
+- Added branch-complete unit matrix for RuntimeEndpointGuard decision paths (mode, token parsing, proxy strict/trust, CIDR IPv4/IPv6, parse errors): `Test/Service/Runtime/RuntimeEndpointGuardTest.php`
+- Added concise scenario-to-assertion mapping doc: `docs/runtime/security-endpoint-guard-test-matrix.md`
+- Added focused smoke runner for the guard test group: `tools/smoke/runtime-endpoint-guard.sh`

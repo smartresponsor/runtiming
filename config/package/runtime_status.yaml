@@ -1,3 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-parameters:
-  runtime_supercharger_telemetry_dir: '%env(default:var/runtime/telemetry:RUNTIME_TELEMETRY_DIR)%'
+# Deprecated alias: remove after 2026-06-30. Use config/package/runtime-status.yaml.
+imports:
+  - { resource: runtime-status.yaml }

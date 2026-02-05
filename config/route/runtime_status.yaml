@@ -1,10 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-runtime_status_worker:
-  path: /status
-  controller: App\Http\Runtime\RuntimeStatusController::worker
-  methods: [GET]
-
-runtime_status_host:
-  path: /runtime/status/host
-  controller: App\Http\Runtime\RuntimeStatusController::host
-  methods: [GET]
+# Deprecated alias: remove after 2026-06-30. Use config/route/runtime-status.yaml.
+imports:
+  - { resource: runtime-status.yaml }

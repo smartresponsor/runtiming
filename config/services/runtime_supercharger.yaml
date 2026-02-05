@@ -1,15 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-#
-# Example wiring. Keep params in env if you prefer.
-#
-# services:
-#   App\Service\Runtime\RuntimeSupercharger:
-#     arguments:
-#       $servicesResetter: '@?services_resetter'
-#       $gcEnable: '%env(bool:RUNTIME_SUPERCHARGER_GC_ENABLE)%'
-#
-#   App\Http\Runtime\RuntimeSuperchargerSymfonySubscriber:
-#     arguments:
-#       $enableBeforeRequest: '%env(bool:RUNTIME_SUPERCHARGER_BEFORE_ENABLE)%'
-#       $enableAfterResponse: '%env(bool:RUNTIME_SUPERCHARGER_AFTER_ENABLE)%'
-#     tags: ['kernel.event_subscriber']
+# Deprecated alias: remove after 2026-06-30. Use config/service/runtime-supercharger.yaml.
+imports:
+  - { resource: ../service/runtime-supercharger.yaml }

@@ -1,31 +1,4 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
-#
-# Example wiring (Symfony) for sketch-14.
-#
-# services:
-#   App\Service\Runtime\RuntimeWorkerState: ~
-#
-#   # Effective config (from sketch-11 provider):
-#   App\ServiceInterface\Runtime\RuntimeSuperchargerConfigInterface:
-#     factory: ['@App\Infra\Runtime\RuntimeSuperchargerEnvConfigProvider', 'getConfig']
-#
-#   # Optional: wire real sink/emitter/exporter from sketch-10/13.
-#   # If not wired, these no-ops keep lifecycle safe.
-#   App\Service\Runtime\RuntimeNullNdjsonSink: ~
-#   App\Service\Runtime\RuntimeNullMetricEmitter: ~
-#   App\Service\Runtime\RuntimeNullMetricExporter: ~
-#
-#   App\Service\Runtime\RuntimeSuperchargerLifecycle:
-#     arguments:
-#       $config: '@App\ServiceInterface\Runtime\RuntimeSuperchargerConfigInterface'
-#       $state: '@App\Service\Runtime\RuntimeWorkerState'
-#       $resetRegistry: '@App\ServiceInterface\Runtime\RuntimeResetRegistryInterface'
-#       $workerSupervisor: '@App\ServiceInterface\Runtime\RuntimeWorkerSupervisorInterface'
-#       $sink: '@App\Service\Runtime\RuntimeNullNdjsonSink'
-#       $metricEmitter: '@App\Service\Runtime\RuntimeNullMetricEmitter'
-#       $metricExporter: '@App\Service\Runtime\RuntimeNullMetricExporter'
-#
-#   App\Infra\Runtime\RuntimeSuperchargerKernelSubscriber:
-#     arguments:
-#       $lifecycle: '@App\Service\Runtime\RuntimeSuperchargerLifecycle'
-#     tags: ['kernel.event_subscriber']
+# Deprecated alias: remove after 2026-06-30. Use config/service/runtime-supercharger-symfony-lifecycle.yaml.
+imports:
+  - { resource: ../service/runtime-supercharger-symfony-lifecycle.yaml }

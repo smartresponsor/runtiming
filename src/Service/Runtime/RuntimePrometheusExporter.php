@@ -117,11 +117,16 @@ final class RuntimePrometheusExporter implements RuntimePrometheusExporterInterf
 
     private function labelValue(string $v): string
     {
-        $v = (string) $v;
-        $v = str_replace("\\", "\\\\", $v);
-        $v = str_replace("\n", "\\n", $v);
-        $v = str_replace('"', '\\"', $v);
-        return $v;
+        $v = trim($v);
+
+        if (str_starts_with($v, '"') && str_ends_with($v, '"')) {
+            $v = substr($v, 1, -1);
+        }
+
+        $v = str_replace('\\', '\\\\', $v);
+        $v = str_replace("\n", '\\n', $v);
+
+        return str_replace('"', '\\"', $v);
     }
 
     private function float(float $v): string

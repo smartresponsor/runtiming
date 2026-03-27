@@ -1,17 +1,27 @@
 # Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
 parameters:
-  runtime_supercharger_telemetry_dir: '%env(default:var/runtime/telemetry:RUNTIME_TELEMETRY_DIR)%'
+  runtime_supercharger_default_telemetry_dir: 'var/runtime/telemetry'
+  runtime_supercharger_default_endpoint_security_enabled: '1'
+  runtime_supercharger_default_endpoint_allow_cidr: '127.0.0.1/32'
+  runtime_supercharger_default_endpoint_security_mode: 'allowlist'
+  runtime_supercharger_default_worker_max_request: '1000'
+  runtime_supercharger_default_worker_max_memory_mb: '512'
+  runtime_supercharger_default_worker_reset_enabled: '1'
+  runtime_supercharger_default_worker_reset_kernel: '1'
+  runtime_supercharger_default_worker_reset_doctrine: '1'
+
+  runtime_supercharger_telemetry_dir: '%env(default:runtime_supercharger_default_telemetry_dir:RUNTIME_TELEMETRY_DIR)%'
 
   # Endpoint security (secure-default; may be overridden via runtime_supercharger.endpoint_security config)
-  runtime_supercharger_endpoint_security_enabled: '%env(default:1:RUNTIME_ENDPOINT_SECURITY_ENABLED)%'
-  runtime_supercharger_endpoint_allow_cidr: '%env(default:127.0.0.1/32:RUNTIME_ENDPOINT_ALLOW_CIDR)%'
-  runtime_supercharger_endpoint_security_mode: '%env(default:allowlist:RUNTIME_ENDPOINT_SECURITY_MODE)%'
+  runtime_supercharger_endpoint_security_enabled: '%env(default:runtime_supercharger_default_endpoint_security_enabled:RUNTIME_ENDPOINT_SECURITY_ENABLED)%'
+  runtime_supercharger_endpoint_allow_cidr: '%env(default:runtime_supercharger_default_endpoint_allow_cidr:RUNTIME_ENDPOINT_ALLOW_CIDR)%'
+  runtime_supercharger_endpoint_security_mode: '%env(default:runtime_supercharger_default_endpoint_security_mode:RUNTIME_ENDPOINT_SECURITY_MODE)%'
 
   # Worker lifecycle (env-backed defaults; may be overridden via runtime_supercharger.worker config)
-  runtime_supercharger_worker_max_request: '%env(default:1000:RUNTIME_WORKER_MAX_REQUEST)%'
-  runtime_supercharger_worker_max_memory_mb: '%env(default:512:RUNTIME_WORKER_MAX_MEMORY_MB)%'
+  runtime_supercharger_worker_max_request: '%env(default:runtime_supercharger_default_worker_max_request:RUNTIME_WORKER_MAX_REQUEST)%'
+  runtime_supercharger_worker_max_memory_mb: '%env(default:runtime_supercharger_default_worker_max_memory_mb:RUNTIME_WORKER_MAX_MEMORY_MB)%'
 
   # Worker reset (env-backed defaults; may be overridden via runtime_supercharger.worker.reset config)
-  runtime_supercharger_worker_reset_enabled: '%env(default:1:RUNTIME_WORKER_RESET_ENABLED)%'
-  runtime_supercharger_worker_reset_kernel: '%env(default:1:RUNTIME_WORKER_RESET_KERNEL)%'
-  runtime_supercharger_worker_reset_doctrine: '%env(default:1:RUNTIME_WORKER_RESET_DOCTRINE)%'
+  runtime_supercharger_worker_reset_enabled: '%env(default:runtime_supercharger_default_worker_reset_enabled:RUNTIME_WORKER_RESET_ENABLED)%'
+  runtime_supercharger_worker_reset_kernel: '%env(default:runtime_supercharger_default_worker_reset_kernel:RUNTIME_WORKER_RESET_KERNEL)%'
+  runtime_supercharger_worker_reset_doctrine: '%env(default:runtime_supercharger_default_worker_reset_doctrine:RUNTIME_WORKER_RESET_DOCTRINE)%'

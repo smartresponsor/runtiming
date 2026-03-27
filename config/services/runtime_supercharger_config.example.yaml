@@ -1,0 +1,19 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+#
+# Example wiring (Symfony).
+#
+# services:
+#   App\Provider\Runtime\RuntimeSuperchargerEnvConfigProvider: ~
+#
+#   App\Service\Runtime\RuntimeSuperchargerConfigValidator: ~
+#
+#   # Symfony Console commands (optional):
+#   App\Command\Runtime\RuntimeSuperchargerStatusCommand:
+#     arguments:
+#       $provider: '@App\Provider\Runtime\RuntimeSuperchargerEnvConfigProvider'
+#     tags: ['console.command']
+#
+#   App\Command\Runtime\RuntimeSuperchargerValidateCommand:
+#     arguments:
+#       $provider: '@App\Provider\Runtime\RuntimeSuperchargerEnvConfigProvider'
+#     tags: ['console.command']

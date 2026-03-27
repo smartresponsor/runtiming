@@ -21,7 +21,7 @@ services:
 
   App\ServiceInterface\Runtime\RuntimeWorkerTerminatorInterface: '@App\Service\Runtime\RuntimeWorkerTerminator'
 
-  App\Http\Runtime\RuntimeWorkerLifecycleSubscriber:
+  App\EventSubscriber\Runtime\RuntimeWorkerLifecycleSubscriber:
     arguments:
       $state: '@App\ServiceInterface\Runtime\RuntimeWorkerStateInterface'
       $policy: '@App\ServiceInterface\Runtime\RuntimeWorkerLifecyclePolicyInterface'

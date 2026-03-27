@@ -56,7 +56,9 @@ final class RuntimePrometheusFormatter
 
     private function escapeLabelValue(string $v): string
     {
-        $v = str_replace(['\\', "\n", '"'], ['\\\\', '\\n', '\\"'], $v);
-        return $v;
+        $v = str_replace('"', '\\"', $v);
+        $v = str_replace('\\', '\\\\', $v);
+
+        return str_replace("\n", '\\n', $v);
     }
 }

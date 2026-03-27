@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace App\Service\Runtime;
 
-use App\Infra\Runtime\RuntimeWarmerRegistry;
+use App\Registry\Runtime\RuntimeWarmerRegistry;
 use App\ServiceInterface\Runtime\RuntimeWarmupServiceInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;

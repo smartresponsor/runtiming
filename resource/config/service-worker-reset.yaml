@@ -6,7 +6,7 @@ services:
 
   App\ServiceInterface\Runtime\RuntimeResetRegistryInterface: '@App\Service\Runtime\RuntimeResetRegistry'
 
-  App\Infra\Runtime\RuntimeResetterRegistry:
+  App\Registry\Runtime\RuntimeResetterRegistry:
     arguments:
       $registry: '@App\ServiceInterface\Runtime\RuntimeResetRegistryInterface'
 
@@ -22,7 +22,7 @@ services:
       $doctrine: '@?doctrine'
     tags: ['runtime_supercharger_resetter']
 
-  App\Http\Runtime\RuntimeWorkerResetSubscriber:
+  App\EventSubscriber\Runtime\RuntimeWorkerResetSubscriber:
     arguments:
       $enabled: '%runtime_supercharger_worker_reset_enabled%'
       $registry: '@App\ServiceInterface\Runtime\RuntimeResetRegistryInterface'

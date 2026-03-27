@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Service\Runtime;
 
-use App\Runtime\RuntimeSuperchargerContract;
+use App\Contract\RuntimeSuperchargerContract;
 use App\ServiceInterface\Runtime\RuntimeEndpointGuardInterface;
 use App\ServiceInterface\Runtime\RuntimeEndpointGuardResult;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +30,7 @@ final class RuntimeEndpointGuard implements RuntimeEndpointGuardInterface
         string $proxyStrict
     ) {
         $this->enabledRaw = $enabled;
-        $this->mode = $mode !== '' ? $mode : 'allowlist_or_token';
+        $this->mode = $mode;
         $this->allowCidrRaw = $allowCidr;
         $this->token = $token;
         $this->header = $header !== '' ? $header : 'X-Runtime-Token';
@@ -72,6 +72,10 @@ final class RuntimeEndpointGuard implements RuntimeEndpointGuardInterface
             if ($this->token === '') {
                 return RuntimeEndpointGuardResult::deny('tokenMissingConfig');
             }
+            if ($token === '') {
+                return RuntimeEndpointGuardResult::deny('tokenMissing');
+            }
+
             return $tokenOk ? RuntimeEndpointGuardResult::allow('token') : RuntimeEndpointGuardResult::deny('tokenDenied');
         }
 
@@ -121,7 +125,7 @@ final class RuntimeEndpointGuard implements RuntimeEndpointGuardInterface
         if ($m === 'allowlist_only' || $m === 'require_token' || $m === 'allowlist_or_token') {
             return $m;
         }
-        return 'allowlist_or_token';
+        return $this->token !== '' ? 'require_token' : 'allowlist_or_token';
     }
 
     private function isRuntimeEndpointPath(string $path): bool

@@ -41,6 +41,6 @@ final class RuntimeSuperchargerService implements RuntimeSuperchargerServiceInte
     {
         $env = (string) ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? getenv('APP_ENV') ?: '');
 
-        return $env === 'dev' || $env === 'test';
+        return $env === 'dev';
     }
 }

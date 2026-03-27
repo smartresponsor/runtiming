@@ -1,0 +1,21 @@
+parameters:
+  env(APP_SECRET): 'dev-secret-change-me'
+
+services:
+  App\Provider\Runtime\RuntimeSuperchargerEnvConfigProvider:
+    public: true
+
+  App\ServiceInterface\Runtime\RuntimeSuperchargerConfigProviderInterface: '@App\Provider\Runtime\RuntimeSuperchargerEnvConfigProvider'
+
+  App\Service\Runtime\RuntimeSuperchargerConfigValidator:
+    public: true
+
+  App\Command\Runtime\RuntimeSuperchargerStatusCommand:
+    arguments:
+      $provider: '@App\ServiceInterface\Runtime\RuntimeSuperchargerConfigProviderInterface'
+    public: true
+
+  App\Command\Runtime\RuntimeSuperchargerValidateCommand:
+    arguments:
+      $provider: '@App\ServiceInterface\Runtime\RuntimeSuperchargerConfigProviderInterface'
+    public: true

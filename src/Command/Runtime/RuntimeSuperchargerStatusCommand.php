@@ -6,14 +6,17 @@ namespace App\Command\Runtime;
 
 use App\ServiceInterface\Runtime\RuntimeSuperchargerConfigProviderInterface;
 use App\Service\Runtime\RuntimeSuperchargerConfigValidator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'runtime:supercharger:status',
+    description: 'Print effective Runtime Supercharger config as JSON.',
+)]
 final class RuntimeSuperchargerStatusCommand extends Command
 {
-    protected static $defaultName = 'runtime:supercharger:status';
-
     private RuntimeSuperchargerConfigProviderInterface $provider;
 
     public function __construct(RuntimeSuperchargerConfigProviderInterface $provider)
@@ -24,7 +27,6 @@ final class RuntimeSuperchargerStatusCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Print effective Runtime Supercharger config as JSON.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

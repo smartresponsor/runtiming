@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+
+use App\Command\Runtime\RuntimeSuperchargerStatusCommand;
+use App\Command\Runtime\RuntimeSuperchargerValidateCommand;
+use App\Kernel;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Dotenv\Dotenv;
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+if (class_exists(Dotenv::class) && file_exists(dirname(__DIR__) . '/.env')) {
+    (new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
+}
+
+$env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? 'dev';
+$debug = (bool) ($_SERVER['APP_DEBUG'] ?? $_ENV['APP_DEBUG'] ?? true);
+
+$kernel = new Kernel($env, $debug);
+$kernel->boot();
+
+$container = $kernel->getContainer();
+
+$application = new Application('Runtiming Console');
+$application->setAutoExit(true);
+
+foreach ([RuntimeSuperchargerStatusCommand::class, RuntimeSuperchargerValidateCommand::class] as $serviceId) {
+    if ($container->has($serviceId)) {
+        $application->addCommand($container->get($serviceId));
+    }
+}
+
+$application->run();

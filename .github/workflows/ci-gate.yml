@@ -3,11 +3,52 @@ name: build-test-gate
 
 on:
   push:
+    branches: ["master"]
+    paths:
+      - '.github/workflows/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'Test/**'
+      - 'config/**'
+      - 'resource/**'
+      - 'tools/**'
+      - 'docs/**'
+      - 'ops/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpunit.xml.dist'
+      - 'phpstan.neon'
   pull_request:
+    branches: ["master"]
+    paths:
+      - '.github/workflows/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'Test/**'
+      - 'config/**'
+      - 'resource/**'
+      - 'tools/**'
+      - 'docs/**'
+      - 'ops/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpunit.xml.dist'
+      - 'phpstan.neon'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   build-test-gate:
     runs-on: ubuntu-22.04
+
+    env:
+      COMPOSER_NO_INTERACTION: '1'
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -18,18 +59,10 @@ jobs:
           php-version: '8.4'
           install-deps: 'true'
 
-      - name: Fetch PHPUnit
-        env:
-          PHPUNIT_VERSION: '10.5.19'
-        run: |
-          curl -fsSL -o phpunit.phar "https://github.com/sebastianbergmann/phpunit/releases/download/${PHPUNIT_VERSION}/phpunit-${PHPUNIT_VERSION}.phar"
-          curl -fsSL -o phpunit.phar.sha256 "https://github.com/sebastianbergmann/phpunit/releases/download/${PHPUNIT_VERSION}/phpunit-${PHPUNIT_VERSION}.phar.sha256"
-          sha256sum -c phpunit.phar.sha256
-
       - name: Run unit tests
         run: |
           mkdir -p report/runtime/ci
-          php phpunit.phar --bootstrap tools/runtime/phpunit-bootstrap.php --log-junit report/runtime/ci/junit.xml Test
+          vendor/bin/phpunit -c phpunit.xml.dist --log-junit report/runtime/ci/junit.xml
 
       - name: Run runtime gate
         run: |

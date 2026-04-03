@@ -1,0 +1,43 @@
+# Copyright (c) 2025 Oleksandr Tishchenko / Marketing America Corp
+name: release-on-tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup PHP + Composer cache
+        uses: ./.github/actions/php-runtime-setup
+        with:
+          php-version: '8.4'
+          install-deps: 'true'
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c phpunit.xml.dist
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse -c phpstan.neon --no-progress
+
+      - name: Run runtime RC gate
+        run: |
+          export RUNTIME_GATE_OUT_DIR="${GITHUB_WORKSPACE}/report/runtime/release-gate"
+          bash tools/runtime/gate/run-rc-gate.sh
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          draft: false
+          prerelease: false

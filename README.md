@@ -29,6 +29,7 @@ Symfony-oriented runtime utilities for long-running workers:
 | Production runbook | `docs/runtime/runtime-supercharger-prod-runbook-01_0.md` |
 | Incident/debug checklist | `docs/runtime/runtime-supercharger-incident-playbook-01_0.md`, `docs/runtime/runtime-supercharger-debug-checklist-01_0.md` |
 | CI evidence and artifacts | `docs/runtime/ci-evidence.md` |
+| Release process | `docs/runtime/release-governance.md`, `docs/runtime/CHANGELOG.md` |
 
 ## Architecture map
 
@@ -57,8 +58,20 @@ Symfony-oriented runtime utilities for long-running workers:
 
 ## CI gate
 
-GitHub workflow:
+GitHub workflows:
 
 ```bash
 bash tools/runtime/ci-gate.sh
 ```
+
+- `runtime-gate-master` — canonical RC gate on master and PRs to master
+- `build-test-gate` — unit + RC support gate
+- `ci-phpstan` — static analysis gate
+
+## Release
+
+- Tag format: `vX.Y.Z`
+- Release tags trigger `.github/workflows/release-on-tag.yml`
+- A tagged release must pass PHPUnit, PHPStan, and runtime RC gate before publication
+- Release policy details: `docs/runtime/release-governance.md`
+- Change history baseline: `docs/runtime/CHANGELOG.md`

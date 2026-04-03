@@ -2,14 +2,24 @@
 name: ci-phpstan
 
 on:
-  pull_request:
   push:
-    branches:
-      - main
+    branches: ["master"]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'Test/**'
+      - 'config/**'
+      - 'resource/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpstan.neon'
+  pull_request:
+    branches: ["master"]
 
 jobs:
   phpstan:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
